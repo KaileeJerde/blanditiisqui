@@ -1,0 +1,63 @@
+---
+sidebar_label: tailwindcss
+---
+
+# tools.tailwindcss
+
+- **Type:** `Object | Function`
+- **Default:**
+
+```js
+const tailwind = {
+  content: [
+    './config/html/**/*.html',
+    './config/html/**/*.ejs',
+    './config/html/**/*.hbs',
+    './src/**/*.js',
+    './src/**/*.jsx',
+    './src/**/*.ts',
+    './src/**/*.tsx',
+    './storybook/**/*',
+  ],
+  // Use source.design System config as Tailwind CSS theme config
+  theme: source.designSystem,
+};
+```
+
+### Function Type
+
+When `tools.tailwindcss`'s type is Function, the default tailwindcss config will be passed in as the first parameter, the config object can be modified directly, or a value can be returned as the final result.
+
+```ts title="modern.config.ts"
+export default {
+  tools: {
+    tailwindcss(config) {
+      config.content.push('./some-folder/**/*.{js,ts}');
+    },
+  },
+};
+```
+
+### Object Type
+
+When `tools.tailwindcss`'s type is `Object`, the config will be shallow merged with default config by `Object.assign`.
+
+```ts title="modern.config.ts"
+export default {
+  tools: {
+    tailwindcss: {
+      plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/aspect-ratio'),
+        require('@tailwindcss/typography'),
+      ],
+    },
+  },
+};
+```
+
+### Limitations
+
+The `theme` attribute is not allowed, otherwise the build will fail. Modern.js use [source.designSystem](/configure/app/source/design-system) as the Tailwind CSS Theme configuration.
+
+Other uses are consistent with [Tailwind CSS](https://tailwindcss.com/docs/configuration).

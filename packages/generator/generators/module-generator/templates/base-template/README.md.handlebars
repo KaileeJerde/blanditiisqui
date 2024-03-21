@@ -1,0 +1,55 @@
+# Modern.js Package
+
+{{#unless isMonorepoSubProject}}
+## Setup
+
+Install the dependencies:
+
+```bash
+{{packageManager}} install
+```
+
+{{/unless}}
+## Get Started
+
+Run and debug the module:
+
+```
+{{packageManager}} dev
+```
+
+Run test cases:
+
+```
+{{packageManager}} test
+```
+
+{{#if isPublic}}
+Build the module for production:
+
+```
+{{packageManager}} build
+```
+
+{{/if}}
+Enable optional features:
+
+```
+{{packageManager}} new
+```
+
+{{#unless isMonorepoSubProject}}
+Other commands:
+
+```
+{{packageManager}} lint         # Lint and fix source files
+{{#if isPublic}}
+{{packageManager}} change       # Add a new changeset
+{{packageManager}} bump         # Update version and changelog via changeset
+{{packageManager}} release      # Release the package
+{{/if}}
+
+```
+{{/unless}}
+
+For more information, see the [Modern.js Module documentation](https://modernjs.dev/module-tools/en).

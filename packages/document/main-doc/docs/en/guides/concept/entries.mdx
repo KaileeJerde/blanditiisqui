@@ -1,0 +1,234 @@
+---
+sidebar_position: 1
+---
+
+# Entry
+
+In this chapter, you will learn about the entry convention in Modern.js and how to customize it.
+
+## What is Entry?
+
+**Entry refers to the starting module of a page.**
+
+In a Modern.js project, each entry corresponds to an independent page and a server-side route. By default, Modern.js automatically determines the entry of a page based on directory conventions, but also supports customizing the entry through configuration options.
+
+Many configuration options provided by Modern.js are divided by entry, such as page title, HTML template, page meta information, whether to enable SSR/SSG, server-side routing rules, etc.
+
+## Single Entry and Multiple Entries
+
+The project initialized by Modern.js is a single entry (SPA) project, with the following structure:
+
+```
+.
+├── src
+│   └── routes
+│       ├── index.css
+│       ├── layout.tsx
+│       └── page.tsx
+├── package.json
+├── modern.config.ts
+└── tsconfig.json
+```
+
+In a Modern.js project, you can easily switch from single entry to multiple entries by running `pnpm run new` in the project directory and creating an entry:
+
+```bash
+? Please select the operation you want: Create Element
+? Please select the type of element to create: New "entry"
+? Please fill in the entry name: new-entry
+```
+
+After running the command, Modern.js will automatically generate a new entry directory. At this point, you can see that the `src/` directory has the following structure:
+
+```bash
+.
+├── myapp     # Original entry
+│   └── routes
+│       ├── index.css
+│       ├── layout.tsx
+│       └── page.tsx
+└── new-entry  # New entry
+    └── routes
+        ├── index.css
+        ├── layout.tsx
+        └── page.tsx
+```
+
+The original entry code has been moved to a directory with the same name as the `name` field in `package.json`, and a `new-entry` entry directory has been created.
+
+After running `pnpm run dev`, you can see a new route named `/new-entry` has been added, and the migrated code route has not changed.
+
+:::tip
+Modern.js will use the entry with the same name as the `name` field in `package.json` as the main entry. The route of the main entry is `/`, and the route of other entries is `/{entryName}`.
+
+For example, when the `name` field in `package.json` is `myapp`, `src/myapp` will be the main entry of the project.
+
+:::
+
+## Entry Types
+
+Different entry types have different compilation and runtime behaviors.
+
+import EntryMode from '@site-docs-en/components/entry-mode.mdx';
+
+<EntryMode />
+
+By default, Modern.js scans the files under `src/` before starting the project, identifies the entry, and generates the corresponding server-side route.
+
+:::tip
+You can modify the directory for entry identification by using the [source.entriesDir](/configure/app/source/entries-dir) config.
+
+:::
+
+Not all top-level directories under `src/` become project entries. The directory where the entry is located must meet one of the following four conditions:
+
+1. Has a `routes/` directory.
+2. Has an `App.[jt]sx?` file.
+3. Has an `index.[jt]sx?` file.
+4. Has a `pages/` directory (compatible with Modern.js 1.0).
+
+When the `src/` directory meets the entry requirements, Modern.js considers the current project as a single entry application.
+
+:::tip
+In a single entry application, the default entry name is `main`.
+
+:::
+
+When the project is not a single entry application, Modern.js will further look at the top-level directories under `src/`.
+
+### Framework Mode Entry
+
+Framework mode refers to the need to use Modern.js framework capabilities, such as Router, SSR, integrated calls, etc. Under this type of entry convention, the entry defined by the developer is not a real webpack compilation entry. Modern.js will generate a wrapped entry during startup, and you can find the real entry in `node_modules/.modern/{entryName}/index.js`.
+
+#### Conventional Routing
+
+If there is a `routes/` directory in the entry, Modern.js will scan the files under `routes/` during startup, and automatically generate client-side routes (react-router) based on file conventions. For example:
+
+```bash
+.
+├── src
+│   └── routes
+│       ├── layout.tsx
+│       └── page.tsx
+```
+
+In the above directory, the component exported in `layout.tsx` will be the outermost component, and the component exported in `page.tsx` will be the component of the `/` route.
+
+For more information, please refer to [Conventional Routing](/guides/basic-features/routes.html#conventional-routing).
+
+#### Self-controlled Routing
+
+If there is an `App.[jt]sx?` file in the entry, developers can set the client-side route in this file through code, or not set the client-side route.
+
+```tsx
+import { BrowserRouter, Route, Routes } from '@modern-js/runtime/router';
+
+export default () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<div>index</div>} />
+        <Route path="about" element={<div>about</div>} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+```
+
+For more information, please refer to [Self-controlled Routing](/guides/basic-features/routes.html#self-controlled-routing).
+
+#### Custom Bootstrap
+
+If there is an `index.[jt]sx` file in the entry, and the file exports a function by default, Modern.js will pass the default `bootstrap` function as a parameter and use the exported function to replace the default `bootstrap`. This way, developers can customize how components are mounted to DOM nodes or add custom behavior before mounting. For example:
+
+```tsx
+export default (App: React.ComponentType, bootstrap: () => void) => {
+  // do something before bootstrap...
+  initSomething().then(() => {
+    bootstrap();
+  })
+};
+```
+
+At this point, the generated file content of Modern.js is as follows:
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import customBootstrap from '@_modern_js_src/index.tsx';
+import App from '@_modern_js_src/App';
+import { router, state } from '@modern-js/runtime/plugins';
+
+const IS_BROWSER = typeof window !== 'undefined' && window.name !== 'nodejs';
+const MOUNT_ID = 'root';
+
+let AppWrapper = null;
+
+function render() {
+  AppWrapper = createApp({
+    // plugin parameters for runtime...
+  })(App);
+  if (IS_BROWSER) {
+    customBootstrap(AppWrapper);
+  }
+  return AppWrapper;
+}
+
+AppWrapper = render();
+
+export default AppWrapper;
+```
+
+### Build Mode Entry
+
+Build mode refers to not using any Modern.js runtime capabilities and completely defining the project's webpack entry by the developer.
+
+If there is an `index.[jt]sx` file in the entry and it does not export a default function, then this file is the real webpack entry file. Similar to [Create React App](https://github.com/facebook/create-react-app), you need to mount the component to the DOM node by yourself, add hot update code, etc. For example:
+
+```js title=src/index.jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+Modern.js **does not recommend** using this method for new projects, as it loses some of the framework's capabilities, such as the `runtime` configuration in the `modern.config.js` file will no longer take effect. However, this method can be very useful when migrating projects from other frameworks to Modern.js, such as CRA, or manually building webpack.
+
+## Specifying Entry Using Configuration
+
+Most existing projects are not built according to the directory structure of Modern.js. If you want to change to the directory structure of Modern.js, there will be certain migration costs.
+
+In this case, in addition to using file conventions to generate entries, you can manually configure the entry in `modern.config.[jt]s`.
+
+```ts title="modern.config.ts"
+export default defineConfig({
+  source: {
+    entries: {
+      // Specify a new entry named entry_customize
+      entry_customize: './src/home/test/index.ts',
+    },
+    // Disable default ingress scanning
+    disableDefaultEntries: true,
+  },
+});
+```
+
+### Disable Default Entry Scanning
+
+When using custom entries, part of the project structure may coincidentally hit the directory conventions of Modern.js, but in fact, this part of the directory is not the real entry.
+
+Modern.js provides the `disableDefaultEntries` configuration to disable the default entry scanning rules. When you need to customize the entry, you generally need to use `disableDefaultEntries` in combination with `entries`. This way, some existing projects can be quickly migrated without modifying the directory structure.
+
+```ts title="modern.config.ts"
+export default defineConfig({
+  source: {
+    disableDefaultEntries: true,
+  },
+});
+```
+
+:::tip
+For detailed usage, please refer to [source.entries](/configure/app/source/entries) and [source.disableDefaultEntries](/configure/app/source/disable-default-entries).
+
+:::

@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "name": "entry",
+  "version": "2.9.0",
+  "devDependencies": {
+    "@types/jest": "^29",
+    "@types/node": "^14"
+  }
+}

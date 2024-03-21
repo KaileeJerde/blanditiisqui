@@ -1,0 +1,32 @@
+{
+  "name": "@modern-js/libuild-plugin-swc",
+  "version": "2.31.2",
+  "description": "A plugin for libuild to transform your code with swc",
+  "keywords": [
+    "libuild",
+    "swc"
+  ],
+  "repository": "modern-js-dev/libuild",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "libuild -w",
+    "build": "tsc && libuild"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5",
+    "@modern-js/libuild": "workspace:*",
+    "@modern-js/libuild-utils": "workspace:*"
+  },
+  "dependencies": {
+    "@modern-js/swc-plugins": "0.5.5",
+    "chalk": "4.1.0"
+  },
+  "files": [
+    "dist",
+    "!dist/*.map"
+  ]
+}

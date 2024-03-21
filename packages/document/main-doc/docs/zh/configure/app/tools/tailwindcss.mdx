@@ -1,0 +1,65 @@
+---
+sidebar_label: tailwindcss
+---
+
+# tools.tailwindcss
+
+- **类型：** `Object | Function`
+- **默认值：**
+
+```js
+const tailwind = {
+  content: [
+    './config/html/**/*.html',
+    './config/html/**/*.ejs',
+    './config/html/**/*.hbs',
+    './src/**/*.js',
+    './src/**/*.jsx',
+    './src/**/*.ts',
+    './src/**/*.tsx',
+    './storybook/**/*',
+  ],
+  // 使用 source.designSystem 配置作为 Tailwind CSS Theme 配置
+  theme: source.designSystem,
+};
+```
+
+对应 [TailwindCSS](https://tailwindcss.com/docs/configuration) 的配置。
+
+### Function 类型
+
+当 `tools.tailwindcss` 为 Function 类型时，默认配置会作为第一个参数传入，你可以直接修改配置对象，也可以返回一个值作为最终结果：
+
+```ts title="modern.config.ts"
+export default {
+  tools: {
+    tailwindcss(config) {
+      config.content.push('./some-folder/**/*.{js,ts}');
+    },
+  },
+};
+```
+
+### Object 类型
+
+当 `tools.tailwindcss` 的值为 `Object` 类型时，会与默认配置通过 `Object.assign` 浅合并。
+
+```ts title="modern.config.ts"
+export default {
+  tools: {
+    tailwindcss: {
+      plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/aspect-ratio'),
+        require('@tailwindcss/typography'),
+      ],
+    },
+  },
+};
+```
+
+### 限制
+
+注意，该配置中不允许使用 `theme` 配置项，否则会构建失败。在 Modern.js 中，请使用 [source.designSystem](/configure/app/source/design-system) 作为 `Tailwind CSS Theme` 配置。
+
+其他配置的使用方式和 Tailwind CSS 一致，请参考 [tailwindcss - Configuration](https://tailwindcss.com/docs/configuration)。

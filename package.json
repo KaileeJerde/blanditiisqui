@@ -1,0 +1,97 @@
+{
+  "name": "blanditiisqui",
+  "description": "A Progressive React Framework for modern web development.",
+  "bugs": {
+    "url": "https://github.com/KaileeJerde/blanditiisqui.git/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaileeJerde/blanditiisqui.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "dolorum",
+    "sapiente",
+    "et"
+  ],
+  "engines": {
+    "node": ">=14.17.6",
+    "pnpm": ">=8.0.0 <=8.6.1"
+  },
+  "packageManager": "pnpm@8.6.1",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "node --max_old_space_size=8192 ./node_modules/eslint/bin/eslint.js --fix --color --cache --quiet"
+    ],
+    "*.{js,jsx,mjs,mjsx,cjs,cjsx}": [
+      "node --max_old_space_size=8192 ./node_modules/eslint/bin/eslint.js --fix --color --cache --quiet"
+    ]
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@modern-js"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/plugin-transform-modules-commonjs": "^7.20.11",
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "@modern-js-app/eslint-config": "workspace:*",
+    "@modern-js/eslint-config": "workspace:*",
+    "@modern-js/monorepo-tools": "workspace:*",
+    "@modern-js/plugin-lint": "workspace:*",
+    "@modern-js/tsconfig": "workspace:*",
+    "@scripts/build": "workspace:*",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@vitest/ui": "^0.33.0",
+    "@vitest/coverage-v8": "^0.33.0",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "esbuild": "0.17.19",
+    "husky": "^8.0.0",
+    "turbo": "^1.10.2",
+    "vitest": "0.33.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "^18",
+      "@types/react-dom": "^18"
+    },
+    "allowedDeprecatedVersions": {
+      "formidable": "1.2.6",
+      "hast": "1.0.0",
+      "sourcemap-codec": "1.4.8",
+      "uuid-browser": "3.1.0",
+      "stable": "0.1.8",
+      "js-polyfills": "0.1.43",
+      "picturefill": "3.0.3",
+      "string-similarity": "4.0.4",
+      "querystring": "0.2.0",
+      "source-map-resolve": "0.6.0 || 0.5.3",
+      "@formatjs/intl-utils": "3.8.4",
+      "debug": "4.1.1",
+      "sane": "4.1.0",
+      "@npmcli/move-file": "1.1.2",
+      "uuid": "3.4.0",
+      "chokidar": "2.1.8",
+      "consolidate": "0.15.1",
+      "fsevents": "1.2.13",
+      "source-map-url": "0.4.1",
+      "urix": "0.1.0",
+      "resolve-url": "0.2.1",
+      "devcert": "1.0.0",
+      "superagent": "6.1.0",
+      "@types/sass": "1.45.0"
+    }
+  },
+  "author": "ElzaLeuschke",
+  "version": "1.0.0"
+}

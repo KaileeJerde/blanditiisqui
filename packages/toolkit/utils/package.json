@@ -1,0 +1,340 @@
+{
+  "name": "@modern-js/utils",
+  "description": "A Progressive React Framework for modern web development.",
+  "homepage": "https://modernjs.dev",
+  "bugs": "https://github.com/web-infra-dev/modern.js/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/web-infra-dev/modern.js",
+    "directory": "packages/toolkit/utils"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "framework",
+    "modern",
+    "modern.js"
+  ],
+  "version": "2.31.2",
+  "jsnext:source": "./src/index.ts",
+  "types": "./src/index.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/index.js",
+  "_comment": "Provide ESM and CJS exports, ESM is used by runtime package, for treeshaking",
+  "exports": {
+    ".": {
+      "jsnext:source": "./src/index.ts",
+      "default": "./dist/cjs/index.js"
+    },
+    "./logger": {
+      "jsnext:source": "./src/cli/logger.ts",
+      "default": "./dist/cjs/cli/logger.js"
+    },
+    "./chain-id": {
+      "jsnext:source": "./src/cli/constants/chainId.ts",
+      "default": "./dist/cjs/cli/constants/chainId.js"
+    },
+    "./runtime/router": {
+      "jsnext:source": "./src/runtime/router.ts",
+      "default": "./dist/esm/runtime/router.js"
+    },
+    "./runtime/remix-router": {
+      "jsnext:source": "./src/runtime/remixRouter.ts",
+      "require": "./dist/cjs/runtime/remixRouter.js",
+      "default": "./dist/esm/runtime/remixRouter.js"
+    },
+    "./runtime/nested-routes": {
+      "jsnext:source": "./src/runtime/nestedRoutes.tsx",
+      "default": "./dist/esm/runtime/nestedRoutes.js"
+    },
+    "./runtime-browser": {
+      "jsnext:source": "./src/runtime-browser/index.ts",
+      "default": "./dist/esm/runtime-browser/index.js"
+    },
+    "./runtime-node": {
+      "jsnext:source": "./src/runtime-node/index.ts",
+      "require": "./dist/cjs/runtime-node/index.js",
+      "default": "./dist/esm/runtime-node/index.js"
+    },
+    "./runtime-node/router": {
+      "jsnext:source": "./src/runtime-node/router.ts",
+      "default": "./dist/esm/runtime-node/router.js"
+    },
+    "./universal/constants": {
+      "jsnext:source": "./src/universal/constants.ts",
+      "import": "./dist/esm/universal/constants.js",
+      "default": "./dist/cjs/universal/constants.js"
+    },
+    "./universal/format-webpack": {
+      "jsnext:source": "./src/universal/formatWebpack.ts",
+      "import": "./dist/esm/universal/formatWebpack.js",
+      "default": "./dist/cjs/universal/formatWebpack.js"
+    },
+    "./universal/plugin-dag-sort": {
+      "jsnext:source": "./src/universal/pluginDagSort.ts",
+      "import": "./dist/esm/universal/pluginDagSort.js",
+      "default": "./dist/cjs/universal/pluginDagSort.js"
+    },
+    "./universal/time": {
+      "jsnext:source": "./src/universal/time.ts",
+      "import": "./dist/esm/universal/time.js",
+      "default": "./dist/cjs/universal/time.js"
+    },
+    "./ajv": "./compiled/ajv/index.js",
+    "./commander": "./compiled/commander/index.js",
+    "./ora": "./compiled/ora/index.js",
+    "./glob": "./compiled/glob/index.js",
+    "./chalk": "./compiled/chalk/index.js",
+    "./execa": "./compiled/execa/index.js",
+    "./json5": "./compiled/json5/index.js",
+    "./semver": "./compiled/semver/index.js",
+    "./lodash": "./compiled/lodash/index.js",
+    "./globby": "./compiled/globby/index.js",
+    "./fs-extra": "./compiled/fs-extra/index.js",
+    "./fast-glob": "./compiled/fast-glob/index.js",
+    "./gzip-size": "./compiled/gzip-size/index.js",
+    "./mime-types": "./compiled/mime-types/index.js",
+    "./strip-ansi": "./compiled/strip-ansi/index.js",
+    "./ajv-keywords": "./compiled/ajv-keywords/index.js",
+    "./browserslist": "./compiled/browserslist/index.js",
+    "./webpack-chain": "./compiled/webpack-chain/index.js",
+    "./tsconfig-paths": "./compiled/tsconfig-paths/index.js",
+    "./better-ajv-errors": "./compiled/better-ajv-errors/index.js",
+    "./webpack-dev-middleware": "./compiled/webpack-dev-middleware/index.js"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "provenance": true,
+    "types": "./dist/types/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      },
+      "./logger": {
+        "types": "./dist/types/cli/logger.d.ts",
+        "default": "./dist/cjs/cli/logger.js"
+      },
+      "./chain-id": {
+        "types": "./dist/types/cli/constants/chainId.d.ts",
+        "default": "./dist/cjs/cli/constants/chainId.js"
+      },
+      "./runtime/router": {
+        "types": "./dist/types/runtime/router.d.ts",
+        "default": "./dist/esm/runtime/router.js"
+      },
+      "./runtime/remix-router": {
+        "types": "./dist/types/runtime/remixRouter.d.ts",
+        "require": "./dist/cjs/runtime/remixRouter.js",
+        "default": "./dist/esm/runtime/remixRouter.js"
+      },
+      "./runtime/nested-routes": {
+        "types": "./dist/types/runtime/nestedRoutes.d.ts",
+        "default": "./dist/esm/runtime/nestedRoutes.js"
+      },
+      "./runtime-browser": {
+        "jsnext:source": "./src/runtime-browser/index.d.ts",
+        "default": "./dist/esm/runtime-browser/index.js"
+      },
+      "./runtime-node": {
+        "types": "./dist/types/runtime-node/index.d.ts",
+        "require": "./dist/cjs/runtime-node/index.js",
+        "default": "./dist/esm/runtime-node/index.js"
+      },
+      "./runtime-node/router": {
+        "types": "./dist/types/runtime-node/router.d.ts",
+        "require": "./dist/cjs/runtime-node/router.js",
+        "default": "./dist/esm/runtime-node/router.js"
+      },
+      "./universal/constants": {
+        "types": "./dist/types/universal/constants.d.ts",
+        "import": "./dist/esm/universal/constants.js",
+        "default": "./dist/cjs/universal/constants.js"
+      },
+      "./universal/format-webpack": {
+        "types": "./dist/types/universal/format-webpack.d.ts",
+        "import": "./dist/esm/universal/formatWebpack.js",
+        "default": "./dist/cjs/universal/formatWebpack.js"
+      },
+      "./universal/plugin-dag-sort": {
+        "types": "./dist/types/universal/pluginDagSort.d.ts",
+        "import": "./dist/esm/universal/pluginDagSort.js",
+        "default": "./dist/cjs/universal/pluginDagSort.js"
+      },
+      "./universal/time": {
+        "types": "./dist/types/universal/time.d.ts",
+        "import": "./dist/esm/universal/time.js",
+        "default": "./dist/cjs/universal/time.js"
+      },
+      "./ajv": "./dist/compiled/ajv/index.js",
+      "./commander": "./dist/compiled/commander/index.js",
+      "./ora": "./dist/compiled/ora/index.js",
+      "./glob": "./dist/compiled/glob/index.js",
+      "./chalk": "./dist/compiled/chalk/index.js",
+      "./execa": "./dist/compiled/execa/index.js",
+      "./json5": "./dist/compiled/json5/index.js",
+      "./semver": "./dist/compiled/semver/index.js",
+      "./lodash": "./dist/compiled/lodash/index.js",
+      "./globby": "./dist/compiled/globby/index.js",
+      "./fs-extra": "./dist/compiled/fs-extra/index.js",
+      "./fast-glob": "./dist/compiled/fast-glob/index.js",
+      "./gzip-size": "./dist/compiled/gzip-size/index.js",
+      "./mime-types": "./dist/compiled/mime-types/index.js",
+      "./strip-ansi": "./dist/compiled/strip-ansi/index.js",
+      "./ajv-keywords": "./dist/compiled/ajv-keywords/index.js",
+      "./browserslist": "./dist/compiled/browserslist/index.js",
+      "./webpack-chain": "./dist/compiled/webpack-chain/index.js",
+      "./tsconfig-paths": "./dist/compiled/tsconfig-paths/index.js",
+      "./better-ajv-errors": "./dist/compiled/better-ajv-errors/index.js",
+      "./webpack-dev-middleware": "./dist/compiled/webpack-dev-middleware/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "logger": [
+        "./dist/types/cli/logger.d.ts"
+      ],
+      "chain-id": [
+        "./dist/types/cli/constants/chainId.d.ts"
+      ],
+      "runtime/router": [
+        "./dist/types/runtime/router.d.ts"
+      ],
+      "runtime/remix-router": [
+        "./dist/types/runtime/remixRouter.d.ts"
+      ],
+      "runtime/nested-routes": [
+        "./dist/types/runtime/nestedRoutes.d.ts"
+      ],
+      "runtime-browser": [
+        "./dist/types/runtime-browser/index.d.ts"
+      ],
+      "runtime-node": [
+        "./dist/types/runtime-node/index.d.ts"
+      ],
+      "runtime-node/router": [
+        "./dist/types/runtime-node/router.d.ts"
+      ],
+      "universal/constants": [
+        "./dist/types/universal/constants.d.ts"
+      ],
+      "universal/format-webpack": [
+        "./dist/types/universal/formatWebpack.d.ts"
+      ],
+      "universal/plugin-dag-sort": [
+        "./dist/types/universal/pluginDagSort.d.ts"
+      ],
+      "universal/time": [
+        "./dist/types/universal/time.d.ts"
+      ],
+      "ajv": [
+        "./dist/compiled/ajv/types/ajv.d.ts"
+      ],
+      "execa": [
+        "./dist/compiled/execa/index.d.ts"
+      ],
+      "ajv/json-schema": [
+        "./dist/compiled/ajv/types/types/json-schema.d.ts"
+      ],
+      "glob": [
+        "./dist/compiled/glob/index.d.ts"
+      ],
+      "chalk": [
+        "./dist/compiled/chalk/index.d.ts"
+      ],
+      "json5": [
+        "./dist/compiled/json5/index.d.ts"
+      ],
+      "semver": [
+        "./dist/compiled/semver/index.d.ts"
+      ],
+      "lodash": [
+        "./dist/compiled/lodash/index.d.ts"
+      ],
+      "globby": [
+        "./dist/compiled/globby/index.d.ts"
+      ],
+      "fs-extra": [
+        "./dist/compiled/fs-extra/index.d.ts"
+      ],
+      "fast-glob": [
+        "./dist/compiled/fast-glob/index.d.ts"
+      ],
+      "gzip-size": [
+        "./dist/compiled/gzip-size/index.d.ts"
+      ],
+      "mime-types": [
+        "./dist/compiled/mime-types/index.d.ts"
+      ],
+      "strip-ansi": [
+        "./dist/compiled/strip-ansi/index.d.ts"
+      ],
+      "ajv-keywords": [
+        "./dist/compiled/ajv-keywords/index.d.ts"
+      ],
+      "browserslist": [
+        "./dist/compiled/browserslist/index.d.ts"
+      ],
+      "webpack-chain": [
+        "./dist/compiled/webpack-chain/types/index.d.ts"
+      ],
+      "tsconfig-paths": [
+        "./dist/compiled/tsconfig-paths/lib/index.d.ts"
+      ],
+      "better-ajv-errors": [
+        "./dist/compiled/better-ajv-errors/index.d.ts"
+      ],
+      "webpack-dev-middleware": [
+        "./dist/compiled/webpack-dev-middleware/types/index.d.ts"
+      ],
+      "commander": [
+        "./dist/compiled/commander/typings/index.d.ts"
+      ],
+      "ora": [
+        "./dist/compiled/ora/index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "prepublishOnly": "only-allow-pnpm",
+    "new": "modern-lib new",
+    "dev": "modern-lib build --watch",
+    "build": "modern-lib build",
+    "test": "jest --passWithNoTests"
+  },
+  "dependencies": {
+    "caniuse-lite": "^1.0.30001520",
+    "lodash": "^4.17.21",
+    "serialize-javascript": "^6.0.0",
+    "react-router-dom": "6.11.1",
+    "@remix-run/router": "1.6.1",
+    "@swc/helpers": "0.5.1"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@modern-js/types": "workspace:*",
+    "@scripts/build": "workspace:*",
+    "@scripts/jest-config": "workspace:*",
+    "@types/jest": "^29",
+    "@types/node": "^14",
+    "jest": "^29",
+    "typescript": "^5",
+    "webpack": "^5.88.1",
+    "@types/serialize-javascript": "^5.0.1"
+  },
+  "sideEffects": false
+}

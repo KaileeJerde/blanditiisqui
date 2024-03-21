@@ -1,0 +1,169 @@
+{
+  "name": "@modern-js/builder-shared",
+  "description": "Shared modules of modern.js builder",
+  "homepage": "https://modernjs.dev",
+  "bugs": "https://github.com/web-infra-dev/modern.js/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/web-infra-dev/modern.js",
+    "directory": "packages/builder/builder-shared"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "framework",
+    "modern",
+    "modern.js"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "version": "2.31.2",
+  "jsnext:source": "./src/index.ts",
+  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "scripts": {
+    "prepublishOnly": "only-allow-pnpm",
+    "new": "modern new",
+    "build": "modern-lib build && node scripts/postCompile.js",
+    "dev": "modern-lib build --watch",
+    "test": "vitest run",
+    "test:watch": "vitest dev --no-coverage",
+    "test:ui": "vitest --ui"
+  },
+  "exports": {
+    ".": {
+      "jsnext:source": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./fork-ts-checker-webpack-plugin": {
+      "jsnext:source": "./src/exports/fork-ts-checker-webpack-plugin.ts",
+      "default": "./dist/exports/fork-ts-checker-webpack-plugin.js"
+    },
+    "./open": {
+      "types": "./compiled/open/index.d.ts",
+      "default": "./compiled/open/index.js"
+    },
+    "./webpack-bundle-analyzer": {
+      "types": "./compiled/webpack-bundle-analyzer/index.d.ts",
+      "default": "./compiled/webpack-bundle-analyzer/index.js"
+    },
+    "./babel-loader": "./compiled/babel-loader/index.js",
+    "./webpack-5-chain": {
+      "types": "./compiled/webpack-5-chain/types/index.d.ts",
+      "default": "./compiled/webpack-5-chain/index.js"
+    },
+    "./pug": {
+      "types": "./compiled/pug/index.d.ts",
+      "default": "./compiled/pug/index.js"
+    },
+    "./test-stub": {
+      "jsnext:source": "./src/test-stub/index.ts",
+      "types": "./dist/test-stub/index.d.ts",
+      "default": "./dist/test-stub/index.js"
+    },
+    "./zod": {
+      "jsnext:source": "./src/exports/zod.ts",
+      "types": "./dist/exports/zod.d.ts",
+      "default": "./dist/exports/zod.js"
+    },
+    "./css-modules-typescript-loader": {
+      "jsnext:source": "./src/loaders/css-modules-typescript-loader.ts",
+      "types": "./dist/loaders/css-modules-typescript-loader.d.ts",
+      "default": "./dist/loaders/css-modules-typescript-loader.js"
+    },
+    "./ignore-css-loader": {
+      "jsnext:source": "./src/loaders/ignore-css-loader.ts",
+      "types": "./dist/loaders/ignore-css-loader.d.ts",
+      "default": "./dist/loaders/ignore-css-loader.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "open": [
+        "./compiled/open/index.d.ts"
+      ],
+      "fork-ts-checker-webpack-plugin": [
+        "./dist/exports/fork-ts-checker-webpack-plugin.d.ts"
+      ],
+      "webpack-bundle-analyzer": [
+        "./compiled/webpack-bundle-analyzer/index.d.ts"
+      ],
+      "webpack-5-chain": [
+        "./compiled/webpack-5-chain/types/index.d.ts"
+      ],
+      "test-stub": [
+        "./dist/test-stub/index.d.ts",
+        "./src/test-stub/index.ts"
+      ],
+      "zod": [
+        "./dist/exports/zod.d.ts",
+        "./src/exports/zod.ts"
+      ],
+      "pug": [
+        "./compiled/pug/index.d.ts"
+      ],
+      "css-modules-typescript-loader": [
+        "./dist/loaders/css-modules-typescript-loader.d.ts",
+        "./src/loaders/css-modules-typescript-loader.ts"
+      ],
+      "ignore-css-loader": [
+        "./dist/loaders/ignore-css-loader.d.ts",
+        "./src/loaders/ignore-css-loader.ts"
+      ]
+    }
+  },
+  "dependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/types": "^7.21.5",
+    "@babel/parser": "^7.21.8",
+    "@modern-js/prod-server": "workspace:*",
+    "@modern-js/server": "workspace:*",
+    "@modern-js/types": "workspace:*",
+    "@modern-js/utils": "workspace:*",
+    "@swc/helpers": "0.5.1",
+    "fork-ts-checker-webpack-plugin": "8.0.0",
+    "acorn": "^8.10.0",
+    "caniuse-lite": "^1.0.30001520",
+    "cssnano": "6.0.1",
+    "htmlparser2": "9.0.0",
+    "line-diff": "2.1.1",
+    "postcss": "8.4.27",
+    "source-map": "^0.7.4",
+    "webpack": "^5.88.1",
+    "webpack-sources": "^3.2.3",
+    "zod": "^3.20.2",
+    "zod-validation-error": "1.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.21.5",
+    "@babel/preset-typescript": "^7.21.5",
+    "@scripts/vitest-config": "workspace:*",
+    "@types/babel__core": "^7.20.0",
+    "@types/caniuse-lite": "^1.0.1",
+    "@types/node": "^14",
+    "html-webpack-plugin": "5.5.3",
+    "terser": "5.19.2",
+    "typescript": "^5"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "provenance": true,
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": "./dist/index.js",
+      "./open": "./compiled/open/index.js",
+      "./babel-loader": "./compiled/babel-loader/index.js",
+      "./webpack-bundle-analyzer": "./compiled/webpack-bundle-analyzer/index.js",
+      "./webpack-5-chain": "./compiled/webpack-5-chain/index.js",
+      "./test-stub": "./dist/test-stub/index.js",
+      "./zod": "./dist/exports/zod.js",
+      "./fork-ts-checker-webpack-plugin": "./dist/exports/fork-ts-checker-webpack-plugin.js",
+      "./pug": "./compiled/pug/index.js",
+      "./css-modules-typescript-loader": "./dist/loaders/css-modules-typescript-loader.js",
+      "./ignore-css-loader": "./dist/loaders/ignore-css-loader.js"
+    }
+  }
+}
